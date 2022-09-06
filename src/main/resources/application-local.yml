@@ -10,9 +10,39 @@ management:
   endpoints:
     web:
       base-path: /
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: public
+  datasource:
+    platform: postgres
+    url: jdbc:h2:mem:memdb
+    username: sa
+    password: p
+    driverClassName: org.h2.Driver
+  liquibase:
+    change-log: classpath:/db/changelog/db_master_changelog.xml
+    enabled: true
+  h2:
+    console:
+      # http://localhost:8080/h2-console
+      enabled: true
+  redis:
+    host: localhost
+    port: 6379
+    password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
 
 logging:
   level:
     root: INFO
     org.springframework: INFO
-    ru.gur.arch: DEBUG
+    ru.gur.archorder: DEBUG
+#
+#kafka:
+#  bootstrapAddress: localhost:9091
+#  groupId: group1
