@@ -48,7 +48,7 @@ spring:
     enabled: true
 
   redis:
-    host: ${REDIS_SERVER:redis-order}
+    host: ${REDIS_SERVER:redis}
     port: 6379
     password: ${REDIS_PASSWORD:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81}
 
