@@ -5,13 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.gur.archorder.service.OrderService;
 import ru.gur.archorder.service.data.GetOrderData;
 import ru.gur.archorder.service.immutable.ImmutableCreateOrderRequest;
@@ -66,5 +60,15 @@ public class OrderControllerImpl implements OrderController {
         log.info("Extracted profileId: " + userProfileId);
 
         return orderService.getOrders(userProfileId);
+    }
+
+    @Override
+    @DeleteMapping(path = "/{id}")
+    public UUID deleteOrder(@PathVariable(name = "id") final UUID id,
+                            @RequestHeader(name = "x-jwt-token") final String token) {
+        final UUID userProfileId = getProfileIdFromPayload(token);
+        log.info("Extracted profileId: " + userProfileId);
+
+        return orderService.delete(id, userProfileId);
     }
 }

@@ -13,4 +13,6 @@ public interface OrderService {
     GetOrderData read(UUID id, UUID userProfileId);
 
     List<GetOrderData> getOrders(UUID userProfileId);
+
+    UUID delete(UUID id, UUID userProfileId);
 }
