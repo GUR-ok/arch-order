@@ -1,4 +1,4 @@
-package ru.gur.archorder.service;
+package ru.gur.archorder.service.order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +11,8 @@ import ru.gur.archorder.exception.NotAuthorizedException;
 import ru.gur.archorder.exception.OrderNotFoundException;
 import ru.gur.archorder.persistance.OrderRepository;
 import ru.gur.archorder.persistance.RedisRepository;
-import ru.gur.archorder.service.data.GetOrderData;
-import ru.gur.archorder.service.immutable.ImmutableCreateOrderRequest;
+import ru.gur.archorder.service.order.data.GetOrderData;
+import ru.gur.archorder.service.order.immutable.ImmutableCreateOrderRequest;
 
 import java.util.List;
 import java.util.Objects;

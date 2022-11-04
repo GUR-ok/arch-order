@@ -1,7 +1,7 @@
-package ru.gur.archorder.service;
+package ru.gur.archorder.service.order;
 
-import ru.gur.archorder.service.data.GetOrderData;
-import ru.gur.archorder.service.immutable.ImmutableCreateOrderRequest;
+import ru.gur.archorder.service.order.data.GetOrderData;
+import ru.gur.archorder.service.order.immutable.ImmutableCreateOrderRequest;
 
 import java.util.List;
 import java.util.UUID;

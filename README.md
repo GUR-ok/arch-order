@@ -5,9 +5,10 @@
 2) `docker build -t gurok/arch_order .`
 3) `docker push gurok/arch_order`
 4) `kubectl create namespace arch-gur`
-5) `helm install arch-order ./deployment/app/`
+5) `helm install gorelov-redis ./deployment/redis/`
+6) `helm install gorelov-kafka ./deployment/kafka/`
+7) `helm install arch-order ./deployment/app/`
    `kubectl get pods -n arch-gur`
-6) `helm install gorelov-redis ./deployment/redis/`
 
 ---
 
@@ -15,7 +16,9 @@
 В prod режиме контроллер принимает токен авторизации из хедеров.
 
 Для локального запуска redis: `docker-compose up`
-Указать в Idea: `--spring.profiles.active=local,hw06`
+Для локального поднятия кафки: `docker-compose-kafka up`
+
+Указать в Idea: `--spring.profiles.active=local,hw06,hw08`
 
 Для установки redis manager
 `winget install qishibo.AnotherRedisDesktopManager`
@@ -30,4 +33,4 @@ Port-forward БД:
 - `helm uninstall arch-order`
 - `helm uninstall gorelov-redis`
 - `kubectl delete namespace arch-gur`
-
+- `helm uninstall gorelov-kafka`

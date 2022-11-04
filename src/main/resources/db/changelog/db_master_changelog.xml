@@ -7,4 +7,6 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="06-09-2022--01-create-table-order.xml" relativeToChangelogFile="true"/>
+    <include file="04-11-2022--01-create-column-state.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

@@ -8,11 +8,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -38,4 +34,8 @@ public class Order {
 
     @Column(name = "product_quantity")
     private Long productQuantity;
+
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    private State state;
 }

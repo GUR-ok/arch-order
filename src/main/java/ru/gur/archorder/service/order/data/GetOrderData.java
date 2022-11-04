@@ -1,4 +1,4 @@
-package ru.gur.archorder.service.data;
+package ru.gur.archorder.service.order.data;
 
 import lombok.Builder;
 import lombok.Value;

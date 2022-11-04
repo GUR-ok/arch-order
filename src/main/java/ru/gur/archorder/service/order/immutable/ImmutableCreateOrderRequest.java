@@ -1,4 +1,4 @@
-package ru.gur.archorder.service.immutable;
+package ru.gur.archorder.service.order.immutable;
 
 import lombok.Builder;
 import lombok.Value;
