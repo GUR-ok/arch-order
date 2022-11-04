@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.gur.archorder.entity.IdempKey;
 import ru.gur.archorder.entity.Order;
+import ru.gur.archorder.entity.State;
 import ru.gur.archorder.exception.NotAuthorizedException;
 import ru.gur.archorder.exception.OrderNotFoundException;
 import ru.gur.archorder.persistance.OrderRepository;
@@ -92,6 +93,20 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.deleteById(id);
         log.info("Order delete with id: {}", id);
         return id;
+    }
+
+    @Override
+    @Transactional
+    public void updateStatus(final UUID id, final State state) {
+        Assert.notNull(id, "id must not be null");
+        Assert.notNull(state, "state must not be null");
+
+        final Optional<Order> order = orderRepository.findById(id);
+
+        order.ifPresent(o -> {
+            o.setState(state);
+            orderRepository.save(o);
+        });
     }
 
     private UUID createOrder(final ImmutableCreateOrderRequest request) {

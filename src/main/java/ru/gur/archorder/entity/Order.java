@@ -38,4 +38,9 @@ public class Order {
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
     private State state;
+
+    @PrePersist
+    public void prePersist() {
+        setState(State.PENDING);
+    }
 }

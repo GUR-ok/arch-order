@@ -18,6 +18,11 @@
 Для локального запуска redis: `docker-compose up`
 Для локального поднятия кафки: `docker-compose-kafka up`
 
+Пример сообщения в Кафку: 
+
+{"orderId":"c503155e-3bb8-454a-92d0-6da5d7dca76f","event":"ORDER_CANCEL"}
+{"orderId":"c503155e-3bb8-454a-92d0-6da5d7dca76f","event":"ORDER_APPROVE"}
+
 Указать в Idea: `--spring.profiles.active=local,hw06,hw08`
 
 Для установки redis manager

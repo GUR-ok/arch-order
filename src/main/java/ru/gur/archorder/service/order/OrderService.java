@@ -1,5 +1,6 @@
 package ru.gur.archorder.service.order;
 
+import ru.gur.archorder.entity.State;
 import ru.gur.archorder.service.order.data.GetOrderData;
 import ru.gur.archorder.service.order.immutable.ImmutableCreateOrderRequest;
 
@@ -15,4 +16,6 @@ public interface OrderService {
     List<GetOrderData> getOrders(UUID userProfileId);
 
     UUID delete(UUID id, UUID userProfileId);
+
+    void updateStatus(UUID id, State state);
 }

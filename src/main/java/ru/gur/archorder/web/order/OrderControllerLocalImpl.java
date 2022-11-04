@@ -20,7 +20,8 @@ import java.util.UUID;
 @Slf4j
 @RestController("OrderControllerLocalImpl")
 @RequiredArgsConstructor
-@Profile("hw06, hw08")
+@Profile({"hw08","hw06"})
+@RequestMapping("/orders")
 public class OrderControllerLocalImpl implements OrderController {
 
     private final OrderService orderService;
