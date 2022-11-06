@@ -15,6 +15,7 @@ public class GetOrderDataToGetOrderResponseConverter implements Converter<GetOrd
                 .orderNumber(source.getOrderNumber())
                 .profileId(source.getProfileId())
                 .productQuantity(source.getProductQuantity())
+                .state(source.getState())
                 .build();
     }
 }

@@ -63,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
                 .profileId(order.getProfileId())
                 .orderNumber(order.getOrderNumber())
                 .productQuantity(order.getProductQuantity())
+                .state(order.getState())
                 .build();
     }
 
@@ -76,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
                         .orderNumber(order.getOrderNumber())
                         .productQuantity(order.getProductQuantity())
                         .profileId(order.getProfileId())
+                        .state(order.getState())
                         .build())
                 .collect(Collectors.toList());
     }
