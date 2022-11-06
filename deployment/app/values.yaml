@@ -6,7 +6,7 @@ secret:
   name: arch-order-secret
 deployment:
   app:
-    image: gurok/arch_order
+    image: gurok/arch_order_2
     port: 8000
     replicas: 2
   db:
@@ -30,5 +30,5 @@ service:
 redis:
   name: redis-order
 ingress:
-  name: otus-hw06-ingress
+  name: otus-order-ingress
   host: arch.homework

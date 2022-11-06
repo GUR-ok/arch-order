@@ -1,6 +1,6 @@
 package ru.gur.archorder.web.order;
 
-import ru.gur.archorder.service.data.GetOrderData;
+import ru.gur.archorder.service.order.data.GetOrderData;
 import ru.gur.archorder.web.order.request.CreateOrderRequest;
 import ru.gur.archorder.web.order.response.GetOrderResponse;
 
@@ -14,4 +14,6 @@ public interface OrderController {
     GetOrderResponse read(UUID id, String token);
 
     List<GetOrderData> getOrders(String token);
+
+    UUID deleteOrder(UUID id, String token);
 }

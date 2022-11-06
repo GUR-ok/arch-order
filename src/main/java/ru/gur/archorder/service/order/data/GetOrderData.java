@@ -1,8 +1,9 @@
-package ru.gur.archorder.service.data;
+package ru.gur.archorder.service.order.data;
 
 import lombok.Builder;
 import lombok.Value;
 import org.springframework.util.Assert;
+import ru.gur.archorder.entity.State;
 
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ public class GetOrderData {
 
     Long productQuantity;
 
+    State state;
+
     public static GetOrderData.GetOrderDataBuilder builder() {
         return new GetOrderData.GetOrderDataBuilder() {
             @Override
@@ -27,11 +30,13 @@ public class GetOrderData {
                 Assert.notNull(super.productQuantity, "productQuantity must not be null");
                 Assert.notNull(super.orderNumber, "orderNumber must not be null");
                 Assert.state(super.productQuantity > 0, "productQuantity must be positive");
+                Assert.notNull(super.state, "state must not be null");
 
                 return new GetOrderData(super.id,
                         super.profileId,
                         super.orderNumber,
-                        super.productQuantity);
+                        super.productQuantity,
+                        super.state);
             }
         };
     }
