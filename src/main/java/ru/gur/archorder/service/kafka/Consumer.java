@@ -17,8 +17,13 @@ public class Consumer {
 
     private final Set<EventHandler<EventSource>> eventHandlers;
 
-    @KafkaListener(topics = "order", containerFactory = "kafkaListenerContainerFactoryString")
-    public void listenGroupTopic1(final String message) {
+    @KafkaListener(topics = "topic1", containerFactory = "kafkaListenerContainerFactoryString")
+    public void listenGroupTopic1(String message) {
+        log.info("Receive message {}", message);
+    }
+
+    @KafkaListener(topics = "intercessor", containerFactory = "kafkaListenerContainerFactoryString")
+    public void listenGroupTopic2(String message) throws JsonProcessingException {
         log.info("Receive message: {}", message);
 
         final ObjectMapper objectMapper = new ObjectMapper();
@@ -39,7 +44,7 @@ public class Consumer {
     }
 
     @KafkaListener(topics = "payment", containerFactory = "kafkaListenerContainerFactoryString")
-    public void listenGroupTopic2(final String message) {
+    public void listenGroupTopic3(final String message) {
         log.info("Receive message: {}", message);
 
         final ObjectMapper objectMapper = new ObjectMapper();

@@ -2,8 +2,8 @@
 
 Сборка и установка в minikube
 1) `gradle build`
-2) `docker build -t gurok/arch_order_2 .`
-3) `docker push gurok/arch_order_2`
+2) `docker build -t gurok/arch_order_3 .`
+3) `docker push gurok/arch_order_3`
 4) `kubectl create namespace arch-gur`
 5) `helm install gorelov-redis ./deployment/redis/`
 6) `helm install gorelov-kafka ./deployment/kafka/`
