@@ -2,17 +2,17 @@ package ru.gur.archorder.service.order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import ru.gur.archorder.entity.IdempKey;
 import ru.gur.archorder.entity.Order;
 import ru.gur.archorder.entity.State;
 import ru.gur.archorder.exception.NotAuthorizedException;
 import ru.gur.archorder.exception.OrderNotFoundException;
 import ru.gur.archorder.persistance.OrderRepository;
-import ru.gur.archorder.persistance.RedisRepository;
+import ru.gur.archorder.service.kafka.OrderCreatedEventData;
+import ru.gur.archorder.service.kafka.Producer;
 import ru.gur.archorder.service.order.data.GetOrderData;
 import ru.gur.archorder.service.order.immutable.ImmutableCreateOrderRequest;
 
@@ -25,26 +25,20 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@ConditionalOnMissingBean(OrderServiceHW09Impl.class)
-public class OrderServiceImpl implements OrderService {
+@Profile("hw09")
+public class OrderServiceHW09Impl implements OrderService {
+
+    private static final String TOPIC = "billing";
 
     private final OrderRepository orderRepository;
-    private final RedisRepository redisRepository;
+    private final Producer producer;
 
     @Override
     @Transactional
     public UUID create(final ImmutableCreateOrderRequest request, final String key) {
         Assert.notNull(request, "request must not be null");
-        Assert.hasText(key, "key must not be blank");
 
-        return redisRepository.findById(key)
-                .map(IdempKey::getOrderId)
-                .orElseGet(() -> {
-                            final UUID orderUid = createOrder(request);
-                            redisRepository.save(new IdempKey(key, orderUid, 36000L));
-                            return orderUid;
-                        }
-                );
+        return createOrder(request);
     }
 
     @Override
@@ -120,7 +114,14 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(order);
 
-        log.info("Order created with id: {}", order.getId());
+        final UUID orderId = order.getId();
+        producer.sendEvent(TOPIC, request.getProfileId().toString(), OrderCreatedEventData.builder()
+                .orderId(orderId)
+                .accountId(request.getProfileId())
+                .price((double) (request.getProductQuantity() * 65))
+                .build());
+
+        log.info("Order created with id: {}", orderId);
         return order.getId();
     }
 }

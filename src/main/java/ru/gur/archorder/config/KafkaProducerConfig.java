@@ -47,7 +47,17 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public NewTopic topic1() {
-        return new NewTopic("topic1", 2, (short) 1);
+    public NewTopic orderTopic() {
+        return new NewTopic("order", 2, (short) 1);
+    }
+
+    @Bean
+    public NewTopic billingTopic() {
+        return new NewTopic("billing", 2, (short) 1);
+    }
+
+    @Bean
+    public NewTopic paymentTopic() {
+        return new NewTopic("payment", 2, (short) 1);
     }
 }
