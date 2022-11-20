@@ -25,7 +25,7 @@ import java.util.UUID;
 @RestController("OrderControllerLocalImpl")
 @RequiredArgsConstructor
 @Profile("hw09")
-@RequestMapping("/orders")
+@RequestMapping("/")
 public class OrderControllerHW9Impl implements OrderController {
 
     private final OrderService orderService;
@@ -36,7 +36,7 @@ public class OrderControllerHW9Impl implements OrderController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public UUID create(@Valid @NotNull @RequestBody final CreateOrderRequest createOrderRequest,
                        @RequestParam(name = "profileId") final String token,
-                       @RequestHeader(name = "idempotency-key") String key) {
+                       String key) {
         log.info("Idempotency key: {}", key);
 
         final UUID orderId = orderService.create(ImmutableCreateOrderRequest.builder()
