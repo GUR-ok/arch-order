@@ -8,14 +8,15 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class OrderCancelEventData implements KafkaEvent{
+public class PaymentFailEventData implements KafkaEvent {
 
     UUID orderId;
+
+    UUID accountId;
 
     @Override
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Prevents duplication when serializing to JSON (subtype discriminator property)
     public Event getEvent() {
-        return Event.ORDER_CANCEL;
+        return Event.PAYMENT_FAIL;
     }
 }
-
