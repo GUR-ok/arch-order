@@ -16,7 +16,7 @@
 В prod режиме контроллер принимает токен авторизации из хедеров.
 
 Для локального запуска redis: `docker-compose up`
-Для локального поднятия кафки: `docker-compose .\docker-compose-kafka.yml up`
+Для локального поднятия кафки: `docker-compose -f .\docker-compose-kafka.yml up`
 
 Пример сообщения в Кафку: 
 
